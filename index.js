@@ -1,5 +1,9 @@
 const gitHubForm = document.getElementById('gitHubForm');
 
+let currentPage = 1;
+let reposPerPage = 5;
+let repositoriesData;
+
 gitHubForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -11,8 +15,10 @@ gitHubForm.addEventListener('submit', async (e) => {
         const userProfileData = await fetchUserProfile(gitHubUsername);
         displayUserProfile(userProfileData);
 
-        const repositoriesData = await fetchUserRepositories(userProfileData.repos_url);
-        displayUserRepositories(repositoriesData);
+        repositoriesData = await fetchUserRepositories(userProfileData.repos_url);
+        displayUserRepositories();
+
+        document.getElementById('repoFilters').style.display = 'block';
 
         userContent.scrollIntoView({ behavior: 'smooth' });
     } catch (error) {
@@ -59,40 +65,62 @@ async function fetchUserRepositories(repositoriesURL) {
     return response.json();
 }
 
-function displayUserRepositories(repositoriesData) {
+function displayUserRepositories() {
     let repositories = document.getElementById('repositories');
+    repositories.innerHTML = '';
 
-    for (let repository in repositoriesData) {
+    const startIndex = (currentPage - 1) * reposPerPage;
+    const endIndex = startIndex + reposPerPage;
 
-        console.log(repositoriesData[repository]);
-
+    for (let i = startIndex; i < endIndex && i < repositoriesData.length; i++) {
         let figure = document.createElement('figure');
         let repositoryInfo = document.createElement('div');
         let title = document.createElement('h2');
         let figcaption = document.createElement('figcaption');
         let repositoryTopics = document.createElement('div');
 
-
-
         title.classList.add('repositoryName');
-        title.innerHTML = repositoriesData[repository].name;
+        title.innerHTML = repositoriesData[i].name;
 
         repositoryInfo.classList.add('repositoryInfo');
 
-        figcaption.innerHTML = (`<p> ${repositoriesData[repository].description}</p> `);
-        for (let topic in repositoriesData[repository].topics) {
+        figcaption.innerHTML = (`<p> ${repositoriesData[i].description}</p> `);
+        for (let topic in repositoriesData[i].topics) {
             let button = document.createElement('button');
             button.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'm-1', 'disabled');
-            button.innerHTML = repositoriesData[repository].topics[topic];
+            button.innerHTML = repositoriesData[i].topics[topic];
             repositoryTopics.appendChild(button);
         }
 
         repositoryInfo.appendChild(title);
         repositoryInfo.appendChild(figcaption);
 
- 
         figure.appendChild(repositoryInfo);
         figure.appendChild(repositoryTopics);
         repositories.appendChild(figure);
     }
 }
+
+
+function updatePagination() {
+    reposPerPage = parseInt(document.getElementById('reposPerPage').value);
+    currentPage = 1;
+    displayUserRepositories();
+}
+
+
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        displayUserRepositories();
+    }
+}
+
+function nextPage() {
+    const totalPages = Math.ceil(repositoriesData.length / reposPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        displayUserRepositories();
+    }
+}
+
