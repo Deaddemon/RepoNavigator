@@ -19,7 +19,7 @@
             <div class="logo-container flex-row">
                 <h1>Repo Navigator</h1>
                 <i>Find the public repositories in github</i>
-                <form id="gitHubForm" class="form-inline mx-auto mt-3 " >
+                <form id="gitHubForm" class="form-inline mx-auto mt-3">
                     <input id="usernameInput" class="form-control mb-2 shadow-none" type="text" name="username"
                         placeholder="GitHub Username">
                     <input type="submit" class="btn btn-secondary ml-2 mb-2 shadow-none " value="Submit">
@@ -43,7 +43,34 @@
         </div>
     </div>
 
-    <div id="columns"></div>
+
+
+
+    <div class="container text-begin mt-5 userProfile">
+        <div class="card px-5 py-5" style="max-width: 100%;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img class="avatar" alt="avatar" src="assets/background.png" style="max-width: 100%;">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title userName">Name</h5>
+                        <p class="card-text userBio"> bio</p>
+                        <p class="card-text userTwitterURL">twitter </p>
+                        <p class="card-text"><small class="text-muted userLocation">location</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="repositories"></div>
+
+
+
+
+
+
+    </div>
 
 
 
