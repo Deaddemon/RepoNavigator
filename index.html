@@ -47,25 +47,33 @@
 
 
 
-
-    <div class="container text-begin mt-5" id="userProfile">
-        <div class="card px-5 py-5" style="max-width: 100%;">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    <img class="avatar" alt="avatar" src="assets/background.png" style="max-width: 100%;">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title userName"></h5>
-                        <p class="card-text userBio"></p>
-                        <i class="fa fa-link"></i> <a class="card-text userURL"></a>
-                        <p class="card-text "> <i class="fa fa-globe"></i> <small class="text-muted userLocation"></small></p>
+    <div id="userContent">
+        <div class="container text-begin mt-5" id="userProfile">
+            <div class="card px-5 py-5" style="max-width: 100%;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img class="avatar" alt="avatar" style="max-width: 100%;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title userName"></h5>
+                            <p class="card-text userBio"></p>
+                            <i class="fa fa-link"></i> <a class="card-text userURL"></a>
+                            <p class="card-text "> <i class="fa fa-globe"></i> <small
+                                    class="text-muted userLocation"></small></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div id="repositories"></div>
     </div>
-    <div id="repositories"></div>
+
+
+    <div id="userNotFound">
+        <img class="notFound" src="assets/notFound.png" alt="notFound">
+        <p class="errorText">User not found</p>
+    </div>
 
 
 

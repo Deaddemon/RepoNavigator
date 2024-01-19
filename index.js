@@ -5,13 +5,19 @@ gitHubForm.addEventListener('submit', (e) => {
 
     let usernameInput = document.getElementById('usernameInput');
     let gitHubUsername = usernameInput.value;
-    let userProfile = document.getElementById('userProfile'); 
+    let userContent = document.getElementById('userContent');
+
 
     requestUserProfile(gitHubUsername)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(data => {
- 
 
+            let userProfile = document.getElementById('userProfile');
             let avatar = document.querySelector('.avatar');
             let name = document.querySelector('.userName');
             let bio = document.querySelector('.userBio');
@@ -26,15 +32,22 @@ gitHubForm.addEventListener('submit', (e) => {
             location.innerHTML = data.location;
 
             userProfile.style.display = 'block';
-            userProfile.scrollIntoView({ behavior: 'smooth' });
+            userContent.scrollIntoView({ behavior: 'smooth' });
         })
-        .catch(error => console.log(error, "Something went wrong"));
+        .catch(error => {
+            console.error(error, "Something went wrong");
+            if (error.message.includes("404")) {
 
-             
+                let userError = document.getElementById('userNotFound');
+                userError.style.display = 'block';
+                userError.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+
 });
 
 function requestUserProfile(username) {
     return Promise.resolve(fetch(`https://api.github.com/users/${username}`));
 }
 
- 

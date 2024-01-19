@@ -81,6 +81,7 @@
 
 #userProfile{
   border-outline: none;
+  display: none;
 }
 
 /* Avatar */
@@ -106,6 +107,12 @@
   transform: rotate(10deg);
 }
 
+/* User not found */
+#userNotFound {
+  display: none;
+  text-align: center; 
+  margin-top: 2rem;
+}
  
 
 /* Animation */
