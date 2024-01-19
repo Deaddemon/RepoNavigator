@@ -69,12 +69,18 @@
 #repositories figure figcaption {
   font-size: 0.9rem;
   color: #444;
-  line-height: 1.5;
+  line-height: 1.5; 
+}
+
+#repositories .repositoryInfo{
+  background: 	#fff;
 }
 
 #repositories:hover figure:not(:hover) {
   opacity: 0.4;
+  box-shadow: 8px 8px 8px rgba(34, 25, 25, 0.4);
 }
+
 
 
 /* userProfile */
@@ -106,6 +112,7 @@
   padding: 10px;
   transform: rotate(10deg);
 }
+ 
 
 /* User not found */
 #userNotFound {

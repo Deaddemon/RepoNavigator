@@ -10,8 +10,11 @@ gitHubForm.addEventListener('submit', async (e) => {
     try {
         const userProfileData = await fetchUserProfile(gitHubUsername);
         displayUserProfile(userProfileData);
+
+        const repositoriesData = await fetchUserRepositories(userProfileData.repos_url);
+        displayUserRepositories(repositoriesData);
+
         userContent.scrollIntoView({ behavior: 'smooth' });
-        
     } catch (error) {
         console.error(error, "Something went wrong");
         if (error.message.includes("404")) {
@@ -46,4 +49,50 @@ function displayUserProfile(data) {
     location.innerHTML = data.location;
 
     userProfile.style.display = 'block';
+}
+
+async function fetchUserRepositories(repositoriesURL) {
+    const response = await fetch(repositoriesURL);
+    if (!response.ok) {
+        throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+    }
+    return response.json();
+}
+
+function displayUserRepositories(repositoriesData) {
+    let repositories = document.getElementById('repositories');
+
+    for (let repository in repositoriesData) {
+
+        console.log(repositoriesData[repository]);
+
+        let figure = document.createElement('figure');
+        let repositoryInfo = document.createElement('div');
+        let title = document.createElement('h2');
+        let figcaption = document.createElement('figcaption');
+        let repositoryTopics = document.createElement('div');
+
+
+
+        title.classList.add('repositoryName');
+        title.innerHTML = repositoriesData[repository].name;
+
+        repositoryInfo.classList.add('repositoryInfo');
+
+        figcaption.innerHTML = (`<p> ${repositoriesData[repository].description}</p> `);
+        for (let topic in repositoriesData[repository].topics) {
+            let button = document.createElement('button');
+            button.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'm-1', 'disabled');
+            button.innerHTML = repositoriesData[repository].topics[topic];
+            repositoryTopics.appendChild(button);
+        }
+
+        repositoryInfo.appendChild(title);
+        repositoryInfo.appendChild(figcaption);
+
+ 
+        figure.appendChild(repositoryInfo);
+        figure.appendChild(repositoryTopics);
+        repositories.appendChild(figure);
+    }
 }
