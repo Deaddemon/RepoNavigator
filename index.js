@@ -1,8 +1,8 @@
 const gitHubForm = document.getElementById('gitHubForm');
 
 let currentPage = 1;
-let reposPerPage = 5;
-let repositoriesData;
+let reposPerPage = 10;
+let repositoriesData = [];
 
 gitHubForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -16,7 +16,7 @@ gitHubForm.addEventListener('submit', async (e) => {
         displayUserProfile(userProfileData);
 
         repositoriesData = await fetchUserRepositories(userProfileData.repos_url);
-        displayUserRepositories();
+        displayUserRepositories(repositoriesData);
 
         document.getElementById('repoFilters').style.display = 'block';
 
@@ -39,24 +39,6 @@ async function fetchUserProfile(username) {
     return response.json();
 }
 
-function displayUserProfile(data) {
-    let userProfile = document.getElementById('userProfile');
-    let avatar = document.querySelector('.avatar');
-    let name = document.querySelector('.userName');
-    let bio = document.querySelector('.userBio');
-    let url = document.querySelector('.userURL');
-    let location = document.querySelector('.userLocation');
-
-    avatar.src = data.avatar_url;
-    name.innerHTML = data.name;
-    bio.innerHTML = data.bio;
-    url.innerHTML = data.html_url;
-    url.href = data.html_url;
-    location.innerHTML = data.location;
-
-    userProfile.style.display = 'block';
-}
-
 async function fetchUserRepositories(repositoriesURL) {
     const response = await fetch(repositoriesURL);
     if (!response.ok) {
@@ -64,6 +46,26 @@ async function fetchUserRepositories(repositoriesURL) {
     }
     return response.json();
 }
+
+function displayUserProfile(userData) {
+    let userProfile = document.getElementById('userProfile');
+    let avatar = document.querySelector('.avatar');
+    let name = document.querySelector('.userName');
+    let bio = document.querySelector('.userBio');
+    let url = document.querySelector('.userURL');
+    let location = document.querySelector('.userLocation');
+
+    avatar.src = userData.avatar_url;
+    name.innerHTML = userData.name;
+    bio.innerHTML = userData.bio;
+    url.innerHTML = userData.html_url;
+    url.href = userData.html_url;
+    location.innerHTML = userData.location;
+
+    userProfile.style.display = 'block';
+}
+
+
 
 function displayUserRepositories() {
     let repositories = document.getElementById('repositories');
@@ -84,10 +86,11 @@ function displayUserRepositories() {
 
         repositoryInfo.classList.add('repositoryInfo');
 
-        figcaption.innerHTML = (`<p> ${repositoriesData[i].description}</p> `);
+        figcaption.innerHTML = repositoriesData[i].description;
+
         for (let topic in repositoriesData[i].topics) {
             let button = document.createElement('button');
-            button.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'm-1', 'disabled');
+            button.classList.add('btn', 'btn-outline-info', 'btn-sm', 'm-1', 'disabled');
             button.innerHTML = repositoriesData[i].topics[topic];
             repositoryTopics.appendChild(button);
         }
@@ -95,7 +98,8 @@ function displayUserRepositories() {
         repositoryInfo.appendChild(title);
         repositoryInfo.appendChild(figcaption);
 
-        figure.appendChild(repositoryInfo);
+        figure.appendChild(title);
+        figure.appendChild(figcaption);
         figure.appendChild(repositoryTopics);
         repositories.appendChild(figure);
     }

@@ -1,5 +1,3 @@
-@import url(//fonts.googleapis.com/css?family=Lato:300:400);
-
 .header {
   position: relative;
   text-align: center;
@@ -41,7 +39,6 @@
   background-color: white;
 }
 
-
 /* repositories */
 #repositories {
   column-width: 500px;
@@ -63,29 +60,28 @@
   display: inline-block;
   column-break-inside: avoid;
   width: 100%;
-  max-width: 500px;
+  max-width: 470px;
 }
 
 #repositories figure figcaption {
   font-size: 0.9rem;
   color: #444;
-  line-height: 1.5; 
-}
-
-#repositories .repositoryInfo{
-  background: 	#fff;
+  line-height: 1.5;
 }
 
 #repositories:hover figure:not(:hover) {
   opacity: 0.4;
-  box-shadow: 8px 8px 8px rgba(34, 25, 25, 0.4);
+  box-shadow: 2px 2px 2px 2px rgba(84, 58, 183, 0.2);
+  background: rgba(237, 229, 255);
 }
 
-
+#repoFilters {
+  display: none;
+}
 
 /* userProfile */
 
-#userProfile{
+#userProfile {
   border-outline: none;
   display: none;
 }
@@ -112,15 +108,13 @@
   padding: 10px;
   transform: rotate(10deg);
 }
- 
 
 /* User not found */
 #userNotFound {
   display: none;
-  text-align: center; 
+  text-align: center;
   margin-top: 2rem;
 }
- 
 
 /* Animation */
 

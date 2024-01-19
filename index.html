@@ -6,7 +6,8 @@
     <title>Repo Navigator</title>
     <link rel="icon" type="image/png" href="assets/favicon.ico">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&family=Ubuntu:wght@300&display=swap"
+        rel="stylesheet">
     <!-- Import Font Awesome CDN-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Import the Bootstrap CSS CDN -->
@@ -67,22 +68,65 @@
                 </div>
             </div>
         </div>
+        <div id="repoFilters">
+            <div class="container mt-5">
+                <div class="card" style="max-width: 100%;">
+                    <div class="row no-gutters justify-content-center">
+
+
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row ">
+                                    <div class="col-md-4 my-2">
+                                        <select id="reposPerPage" class="custom-select shadow-none"
+                                            onchange="updatePagination()">
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-8 my-2">
+
+                                        <button class="btn btn-outline-primary shadow-none mx-2 disabled"
+                                            onclick="prevPage()">Previous</button>
+
+                                        <button class="btn btn-outline-primary shadow-none disabled"
+                                            onclick="nextPage()">Next</button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="repositories"></div>
+
+
+        <div id="userNotFound">
+            <img class="notFound" src="assets/notFound.png" alt="notFound">
+            <p class="errorText">User not found</p>
+        </div>
+    </div>
+
+
+    <div id="repositories"></div>
 
 
     <div id="userNotFound">
         <img class="notFound" src="assets/notFound.png" alt="notFound">
         <p class="errorText">User not found</p>
     </div>
-
- 
-
-
-
-
-
     </div>
 
+
+
+
+    <div id="repositories"></div>
 
 
     <script src="index.js"></script>
