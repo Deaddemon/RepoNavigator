@@ -51,6 +51,11 @@
 
 #repoTemplate {
   display: none;
+  width: 100%; 
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 #repoTemplate .card-border {
   border: 2px solid #fffae0;
@@ -72,6 +77,8 @@
   width: 500px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  justify-content: center;
+  width: 100%;
 }
 
 #repoTemplate .card:hover {
@@ -153,7 +160,6 @@
 }
 
 @keyframes move-forever {
-  
   0% {
     transform: translate3d(-90px, 0, 0);
   }
@@ -164,7 +170,6 @@
 }
 
 @media (max-width: 768px) {
-
   .waves {
     height: 40px;
     min-height: 40px;
