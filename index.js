@@ -106,14 +106,6 @@ function displayUserRepositories() {
     }
 }
 
-function toggleReadMore(index) {
-    const readMoreLink = document.getElementById(`readMoreLink${index}`);
-    const extraContent = document.getElementById(`extraContent${index}`);
-
-    extraContent.style.display = extraContent.style.display === 'none' || extraContent.style.display === '' ? 'block' : 'none';
-    readMoreLink.innerText = extraContent.style.display === 'none' ? 'Read More >>' : 'Read Less <<';
-}
-
 
 function updatePagination() {
     reposPerPage = parseInt(document.getElementById('reposPerPage').value);
