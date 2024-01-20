@@ -2,12 +2,16 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="description">
+    <meta name="keywords" content="HTML, CSS, Javascript, Github Repository, Public Repository" />
+    <meta name="description" content="Fetch public Github repositories by User Name" />
+    <meta name="author" content="Vinita" />
+    <meta http-equiv="Content-Type" content="text/html; charset = UTF-8" />
     <title>Repo Navigator</title>
     <link rel="icon" type="image/png" href="assets/favicon.ico">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&family=Ubuntu:wght@300&display=swap"
-        rel="stylesheet">
+    <!-- Import Google Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&family=Ubuntu:wght@300&display=swap">
     <!-- Import Font Awesome CDN-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Import the Bootstrap CSS CDN -->
@@ -18,11 +22,11 @@
 
 <body>
 
-    <div class="header" id="header">
+    <header class="header">
         <div class="inner-header flex">
             <div class="logo-container flex-row">
                 <h1>Repo Navigator</h1>
-                <i>Find the public repositories in github</i>
+                <p><em>Find the public repositories in github</em></p>
                 <form id="gitHubForm" class="form-inline mx-auto mt-3">
                     <input id="usernameInput" class="form-control mb-2 shadow-none" type="text" name="username"
                         placeholder="GitHub Username">
@@ -45,7 +49,7 @@
                 </g>
             </svg>
         </div>
-    </div>
+    </header>
 
 
 
@@ -54,13 +58,14 @@
             <div class="card px-5 py-5" style="max-width: 100%;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img class="avatar" alt="avatar" style="max-width: 100%;">
+                        <img class="avatar" alt="Profile avatar of User" style="max-width: 100%;">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title userName"></h5>
+                            <h2 class="card-title userName"></h2>
                             <p class="card-text userBio"></p>
-                            <i class="fa fa-link"></i> <a class="card-text userURL"></a>
+                            <i class="fa fa-link"></i> <a class="card-text userURL"
+                                title="Check out user's Github URL"></a>
                             <p class="card-text "> <i class="fa fa-globe"></i> <small
                                     class="text-muted userLocation"></small></p>
                         </div>
@@ -113,18 +118,17 @@
                 </div>
                 <div class="text-muted card-footer ">
                     <div class="repoTopics">
-                        
+
                     </div>
                 </div>
             </div>
         </div>
 
+    </div>
 
-
-        <div id="userNotFound">
-            <img class="notFound" src="assets/notFound.png" alt="notFound">
-            <p class="errorText">User not found</p>
-        </div>
+    <div id="userNotFound">
+        <img class="notFound" src="assets/notFound.png" alt="User not Found">
+        <p class="errorText">User not found</p>
     </div>
 
 
