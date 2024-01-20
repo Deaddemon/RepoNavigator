@@ -18,7 +18,7 @@
 
 <body>
 
-    <div class="header">
+    <div class="header" id="header">
         <div class="inner-header flex">
             <div class="logo-container flex-row">
                 <h1>Repo Navigator</h1>
@@ -105,6 +105,20 @@
             </div>
         </div>
         <div id="repositories"></div>
+        <div id="repoTemplate">
+            <div class="card-border card mb-3">
+                <div class="card-body">
+                    <h3 class="card-title repoTitle">Repository Name</h3>
+                    <p class="repoDescription">Repository Description</p>
+                </div>
+                <div class="text-muted card-footer ">
+                    <div class="repoTopics">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
         <div id="userNotFound">
@@ -114,19 +128,7 @@
     </div>
 
 
-    <div id="repositories"></div>
 
-
-    <div id="userNotFound">
-        <img class="notFound" src="assets/notFound.png" alt="notFound">
-        <p class="errorText">User not found</p>
-    </div>
-    </div>
-
-
-
-
-    <div id="repositories"></div>
 
 
     <script src="index.js"></script>

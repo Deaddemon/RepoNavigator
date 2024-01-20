@@ -10,6 +10,7 @@ gitHubForm.addEventListener('submit', async (e) => {
     let usernameInput = document.getElementById('usernameInput');
     let gitHubUsername = usernameInput.value;
     let userContent = document.getElementById('userContent');
+    let userError = document.getElementById('userNotFound');
 
     try {
         const userProfileData = await fetchUserProfile(gitHubUsername);
@@ -19,12 +20,13 @@ gitHubForm.addEventListener('submit', async (e) => {
         displayUserRepositories(repositoriesData);
 
         document.getElementById('repoFilters').style.display = 'block';
+        userError.style.display = 'none';
 
         userContent.scrollIntoView({ behavior: 'smooth' });
     } catch (error) {
         console.error(error, "Something went wrong");
         if (error.message.includes("404")) {
-            let userError = document.getElementById('userNotFound');
+            userContent.innerHTML = '';
             userError.style.display = 'block';
             userError.scrollIntoView({ behavior: 'smooth' });
         }
@@ -68,41 +70,48 @@ function displayUserProfile(userData) {
 
 
 function displayUserRepositories() {
-    let repositories = document.getElementById('repositories');
-    repositories.innerHTML = '';
+     
 
     const startIndex = (currentPage - 1) * reposPerPage;
     const endIndex = startIndex + reposPerPage;
 
+    const repositoryList = document.getElementById('repositories');
+    const repositoryTemplate = document.getElementById('repoTemplate');
+    
+
     for (let i = startIndex; i < endIndex && i < repositoriesData.length; i++) {
-        let figure = document.createElement('figure');
-        let repositoryInfo = document.createElement('div');
-        let title = document.createElement('h2');
-        let figcaption = document.createElement('figcaption');
-        let repositoryTopics = document.createElement('div');
 
-        title.classList.add('repositoryName');
-        title.innerHTML = repositoriesData[i].name;
+        
+        const  repository = repositoryTemplate.cloneNode(true);
+        repository.style.display = 'block';
 
-        repositoryInfo.classList.add('repositoryInfo');
+        let repoTitle = repository.querySelector('.repoTitle');
+        let repoDescription = repository.querySelector('.repoDescription');
+        let repoTopics = repository.querySelector('.repoTopics');
+        
 
-        figcaption.innerHTML = repositoriesData[i].description;
+        repoTitle.innerHTML = repositoriesData[i].name;
+        repoDescription.innerHTML = repositoriesData[i].description;
+        
 
         for (let topic in repositoriesData[i].topics) {
             let button = document.createElement('button');
             button.classList.add('btn', 'btn-outline-info', 'btn-sm', 'm-1', 'disabled');
             button.innerHTML = repositoriesData[i].topics[topic];
-            repositoryTopics.appendChild(button);
+            repoTopics.appendChild(button);
         }
+        
 
-        repositoryInfo.appendChild(title);
-        repositoryInfo.appendChild(figcaption);
-
-        figure.appendChild(title);
-        figure.appendChild(figcaption);
-        figure.appendChild(repositoryTopics);
-        repositories.appendChild(figure);
+        repositoryList.appendChild(repository);
     }
+}
+
+function toggleReadMore(index) {
+    const readMoreLink = document.getElementById(`readMoreLink${index}`);
+    const extraContent = document.getElementById(`extraContent${index}`);
+
+    extraContent.style.display = extraContent.style.display === 'none' || extraContent.style.display === '' ? 'block' : 'none';
+    readMoreLink.innerText = extraContent.style.display === 'none' ? 'Read More >>' : 'Read Less <<';
 }
 
 
@@ -128,3 +137,59 @@ function nextPage() {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function displayUserRepositories() {
+
+
+   
+//     let repositories = document.getElementById('repositories');
+//     repositories.innerHTML = '';
+
+//     const startIndex = (currentPage - 1) * reposPerPage;
+//     const endIndex = startIndex + reposPerPage;
+
+//     for (let i = startIndex; i < endIndex && i < repositoriesData.length; i++) {
+//         let figure = document.createElement('figure');
+//         let repositoryInfo = document.createElement('div');
+//         let title = document.createElement('h2');
+//         let figcaption = document.createElement('figcaption');
+//         let repositoryTopics = document.createElement('div');
+
+//         title.classList.add('repositoryName');
+//         title.innerHTML = repositoriesData[i].name;
+
+//         repositoryInfo.classList.add('repositoryInfo');
+
+//         figcaption.innerHTML = repositoriesData[i].description;
+
+//         for (let topic in repositoriesData[i].topics) {
+//             let button = document.createElement('button');
+//             button.classList.add('btn', 'btn-outline-info', 'btn-sm', 'm-1', 'disabled');
+//             button.innerHTML = repositoriesData[i].topics[topic];
+//             repositoryTopics.appendChild(button);
+//         }
+
+//         repositoryInfo.appendChild(title);
+//         repositoryInfo.appendChild(figcaption);
+
+//         figure.appendChild(title);
+//         figure.appendChild(figcaption);
+//         figure.appendChild(repositoryTopics);
+//         repositories.appendChild(figure);
+//     }
+// }
