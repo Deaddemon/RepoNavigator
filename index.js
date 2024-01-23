@@ -94,7 +94,7 @@ function displayUserRepositories() {
       
         repo.topics.forEach(topic => {
           const button = document.createElement('button');
-          button.classList.add('btn', 'btn-outline-info', 'btn-sm', 'm-1', 'disabled');
+          button.classList.add('btn', 'btn-outline-info', 'btn-sm', 'm-1', 'disabled','shadow-none');
           button.innerHTML = topic;
           repoTopics.appendChild(button);
         });
